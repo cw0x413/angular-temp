@@ -19,7 +19,7 @@ export class CoursesComponent implements OnInit {
       id: 2,
       title: 'Angular 7 Fundamentals',
       description: 'Learn the fundamentals of Angular 6',
-      percentComplete: 32,
+      percentComplete: 92,
       favorite: true
     }
   ];
