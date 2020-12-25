@@ -10,7 +10,7 @@ npm install -g @angular/cli@9.1
 npm install
 ```
 
-To start the app run
+To start the app run : ng serve
 
 
 [Workshop Slides](/Angular_9_Fundamentals.pdf)
