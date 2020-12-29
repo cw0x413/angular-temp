@@ -28,7 +28,7 @@
                     <ng-template #noSelection>select a course</ng-template>
                 </mat-card-title>
             </mat-card-header>
-            <form #form="ngForm" (submit)="saveCourse()">
+            <form #form="ngForm" (submit)="saveCourse(currCourse)">
                 <mat-card-content>
                     <mat-form-field>
                         <input matInput placeholder="title" type="text" name="title" required [(ngModel)]="currCourse.title">

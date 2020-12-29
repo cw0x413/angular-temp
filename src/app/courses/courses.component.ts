@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CoursesService } from '../shared/services/courses.service';
 
 @Component({
   selector: 'app-courses',
@@ -7,27 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursesComponent implements OnInit {
   currCourse = null
-  courses = [
-    {
-      id: 1,
-      title: 'Angular 9 Fundamentals',
-      description: 'Learn the fundamentals of Angular 9',
-      percentComplete: 26,
-      favorite: true
-    },
-    {
-      id: 2,
-      title: 'Angular 7 Fundamentals',
-      description: 'Learn the fundamentals of Angular 6',
-      percentComplete: 92,
-      favorite: true
-    }
-  ];
+  courses = null;
 
-  constructor() { }
+  constructor(private coursesService: CoursesService) { }
 
   ngOnInit(): void {
     this.resetSelectedCourse();
+    this.loadCourses();
   }
   resetSelectedCourse() {
     const emptyCourse = {
@@ -44,13 +31,25 @@ export class CoursesComponent implements OnInit {
     console.log('select lesson fired!', Course);
     this.currCourse = Course;
   }
-  deleteCourse(id) {
-    console.log("deleting");
-  }
   cancel() {
+    this.refreshCourses()
+  }
+  saveCourse(course) {
+    console.log('save course fired!');
+    if (course.id)
+      this.coursesService.update(course).subscribe(result => this.refreshCourses())
+    else
+      this.coursesService.create(course).subscribe(result => this.refreshCourses())
     this.resetSelectedCourse();
   }
-  saveCourse() {
-    console.log('save course fired!');
+  deleteCourse(courseID) {
+    this.coursesService.delete(courseID).subscribe(result => this.refreshCourses());
+  }
+  loadCourses() {
+    this.courses = this.coursesService.all().subscribe(courses => this.courses = courses);
+  }
+  refreshCourses() {
+    this.resetSelectedCourse();
+    this.loadCourses()
   }
 }
