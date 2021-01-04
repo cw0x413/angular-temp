@@ -1,16 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'pm-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Angular 9 Fundamentals';
-  links = [
-    { path: '/home', icon: 'home', title: 'Home' },
-    { path: '/courses', icon: 'view_list', title: 'Courses' },
-  ];
-
-  constructor() {}
+  title = 'Angular: Getting Started';
 }
