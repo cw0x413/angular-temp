@@ -1,23 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../product';
+import { ProductService } from '../product.service'
 @Component({
   selector: 'pm-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
+  errorMsg: string
   performFilter(filterBy: string): IProduct[] {
     filterBy = filterBy.toLocaleLowerCase();
     return this.products.filter((product: IProduct) => product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
   fliteredProducts;
-  constructor() {
-    this.fliteredProducts = this.products;
-    this.listFilter = 'cart'
+  constructor(private productService: ProductService) {
+
   }
 
   ngOnInit(): void {
-    console.log('on init')
+    this.productService.getProducts().subscribe({
+      next: products => {
+        this.products = products
+        this.fliteredProducts = this.products;
+      },
+      error: err => this.errorMsg = err
+    });
+    this.listFilter = ''
   }
   imageWidth = 50;
   imageMargin = 2;
@@ -33,28 +41,12 @@ export class ProductListComponent implements OnInit {
     this.fliteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
   }
 
-  products: IProduct[] = [{
-    "productId": 1,
-    "productName": "Leaf Rake",
-    "productCode": "GDN-0011",
-    "releaseDate": "March 19, 2019",
-    "description": "Leaf rake with 48-inch wooden handle.",
-    "price": 19.95,
-    "starRating": 3.2,
-    "imageUrl": "assets/images/leaf_rake.png"
-  },
-  {
-    "productId": 2,
-    "productName": "Garden Cart",
-    "productCode": "GDN-0023",
-    "releaseDate": "March 18, 2019",
-    "description": "15 gallon capacity rolling garden cart",
-    "price": 32.99,
-    "starRating": 4.2,
-    "imageUrl": "assets/images/garden_cart.png"
-  }];
+  products: IProduct[] = [];
   toggleImage() {
     this.showImage = !this.showImage;
     this.imageTitle = this.showImage ? "Hide Image" : "Show Image";
+  }
+  onRatingClicked(message: string) {
+    this.pageTitle = 'Product List ' + message
   }
 }
