@@ -9,6 +9,7 @@ import { StarComponent } from './shared/star.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router'
 import { ProductDetailComponent } from './products/product-detail/product-detail.component'
+import { NgParticlesModule } from 'ng-particles';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { ProductDetailComponent } from './products/product-detail/product-detail
       { path: 'welcome', component: WelcomeComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
-    ])
+    ]),
+    NgParticlesModule
   ],
   bootstrap: [AppComponent]
 })
