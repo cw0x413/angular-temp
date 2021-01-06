@@ -1,16 +1,14 @@
-<Particles id="tsparticles" [options]="particlesOptions">
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand">{{pageTitle}}</a>
-        <ul class="nav nav-pills">
-            <li>
-                <a [routerLink]="['/welcome']" class="nav-link">Home</a>
-            </li>
-            <li>
-                <a [routerLink]="['/products']" class="nav-link">Product</a>
-            </li>
-        </ul>
-
-    </nav>
-</Particles>
-
+<!-- <Particles id="tsparticles" [options]="particlesOptions"> -->
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand">{{pageTitle}}</a>
+    <ul class="nav nav-pills">
+        <li>
+            <a [routerLink]="['/welcome']" class="nav-link">Home</a>
+        </li>
+        <li>
+            <a [routerLink]="['/products']" class="nav-link">Product</a>
+        </li>
+    </ul>
+</nav>
 <router-outlet></router-outlet>
+<!-- </Particles> -->
